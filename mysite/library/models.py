@@ -7,6 +7,12 @@ class Author(models.Model):
     first_name = models.CharField(verbose_name="Vardas", max_length=100)
     last_name = models.CharField(verbose_name="Pavardė", max_length=100)
 
+    def display_books(self):
+        return ', '.join(book.title for book in self.books.all())
+
+    display_books.short_description = 'Knygos'
+
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

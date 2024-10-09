@@ -1,9 +1,15 @@
 from django.contrib import admin
 from .models import Book, BookInstance, Author, Genre
 
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ["first_name", 'last_name', 'display_books']
+
 class BookInstanceInLine(admin.TabularInline):
     model = BookInstance
     extra =  0
+    can_delete = False
+    readonly_fields = ['uuid']
+    fields = ['uuid', 'due_back', 'status']
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'isbn', 'author', 'display_genre']
@@ -21,5 +27,5 @@ class BookInstanceAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Book, BookAdmin)
 admin.site.register(BookInstance, BookInstanceAdmin)
-admin.site.register(Author)
+admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre)
