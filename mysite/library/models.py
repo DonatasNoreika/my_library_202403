@@ -36,6 +36,15 @@ class Book(models.Model):
                                related_name="books")
     genre = models.ManyToManyField(to="Genre", verbose_name="Žanrai", help_text='Išrinkite žanrą (-us) šiai knygai')
 
+    def display_genre(self):
+        genres = self.genre.all()
+        result = ""
+        for genre in genres:
+            result += genre.name + ", "
+        return result
+
+    display_genre.short_description = "Žanras (-ai)"
+
     def __str__(self):
         return f"{self.title} ({self.author})"
 
