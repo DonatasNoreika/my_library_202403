@@ -6,6 +6,7 @@ import uuid
 class Author(models.Model):
     first_name = models.CharField(verbose_name="Vardas", max_length=100)
     last_name = models.CharField(verbose_name="Pavardė", max_length=100)
+    description = models.TextField(verbose_name="Aprašymas", max_length=4000, null=True, blank=True)
 
     def display_books(self):
         return ', '.join(book.title for book in self.books.all())
