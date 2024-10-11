@@ -11,4 +11,13 @@
 </ul>
 <hr>
 <p>{{ book.summary }}</p>
+<hr>
+<h2>Kopijos:</h2>
+{% if book.instances.all %}
+{% for copy in book.instances.all %}
+<p class="{% if copy.status == 'g' %}text-success{% elif copy.status == 'p' %}text-danger{% elif copy.status == 'r' %}text-warning{% endif %}">{{ copy }}</p>
+{% endfor %}
+{% else %}
+<p>Šios knygos kopijų neturime</p>
+{% endif %}
 {% endblock %}
