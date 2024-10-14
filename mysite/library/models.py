@@ -42,6 +42,7 @@ class Book(models.Model):
     author = models.ForeignKey(to="Author", verbose_name="Autorius", on_delete=models.SET_NULL, null=True, blank=True,
                                related_name="books")
     genre = models.ManyToManyField(to="Genre", verbose_name="Žanrai", help_text='Išrinkite žanrą (-us) šiai knygai')
+    cover = models.ImageField(verbose_name="Viršelis", upload_to="covers", null=True, blank=True)
 
     def display_genre(self):
         genres = self.genre.all()

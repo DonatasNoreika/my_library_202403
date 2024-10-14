@@ -3,6 +3,9 @@
 
 
 {% block "content" %}
+{% if book.cover %}
+<img style="max-width: 20%" src="{{ book.cover.url }}">
+{% endif %}
 <h1>Knyga {{ book.title }}</h1>
 <ul>
     <li><strong>Autorius: </strong>{{ book.author }}</li>
