@@ -9,5 +9,5 @@
     <li><strong>Pavardė: </strong>{{ author.last_name }}</li>
 </ul>
 <hr>
-<p>{{ author.description }}</p>
+<p>{{ author.description | safe }}</p>
 {% endblock %}
