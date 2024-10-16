@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+from datetime import date
 
 
 # Create your models here.
@@ -74,6 +75,11 @@ class BookInstance(models.Model):
         ('r', 'Rezervuota'),
     )
     status = models.CharField(verbose_name="Būsena", max_length=1, choices=LOAN_STATUS, default="a", blank=True)
+
+    def is_overdue(self):
+        return self.due_back and self.due_back < date.today()
+
+    is_overdue.short_description = "Praėjęs terminas"
 
     def __str__(self):
         return f"{self.uuid} - {self.book.title} ({self.get_status_display()}, {self.due_back}, {self.reader})"

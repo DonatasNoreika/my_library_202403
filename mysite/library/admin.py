@@ -16,7 +16,7 @@ class BookAdmin(admin.ModelAdmin):
     inlines = [BookInstanceInLine]
 
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ['uuid', 'book', 'due_back', "reader", 'status']
+    list_display = ['uuid', 'book', 'due_back', "reader", 'status', 'is_overdue']
     list_filter = ['book', 'status', 'due_back']
     search_fields = ['uuid', 'book__title', 'book__author__first_name', 'book__author__last_name']
     list_editable = ['due_back', "reader", 'status']
