@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block "title" %}Paimtos knygos{% endblock %}
+
+
+{% block "content" %}
+<h1>Paimtos knygos:</h1>
+{% for copy in copies %}
+<p>{{ copy }}</p>
+<hr>
+{% endfor %}
+{% endblock %}

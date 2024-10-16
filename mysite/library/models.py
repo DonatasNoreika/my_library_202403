@@ -87,3 +87,5 @@ class BookInstance(models.Model):
     class Meta:
         verbose_name = "Kopija"
         verbose_name_plural = "Kopijos"
+
+
