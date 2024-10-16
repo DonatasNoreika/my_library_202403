@@ -141,5 +141,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'library/media')
 MEDIA_URL = '/media/'
 # print(MEDIA_ROOT) - nevenkite padebuginti, bus lengviau nepasiklysti django filesystem džiunglėse
 
+LOGIN_URL = '/library/accounts/login/'
 LOGIN_REDIRECT_URL = '/library/'
 LOGOUT_REDIRECT_URL = '/'

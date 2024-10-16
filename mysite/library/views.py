@@ -71,6 +71,7 @@ class UserBookInstanceListView(LoginRequiredMixin, generic.ListView):
     model = BookInstance
     template_name = "user_copies.html"
     context_object_name = "copies"
+    # login_url = '/library/accounts/login/'
 
     def get_queryset(self):
         return BookInstance.objects.filter(reader=self.request.user)
