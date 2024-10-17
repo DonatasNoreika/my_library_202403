@@ -6,6 +6,7 @@
 <div class="container">
     <h3>Registracija</h3><br/>
     <form method="post">
+        {% csrf_token %}
         <div class="form-group">
             <label for="username">Vartotojo vardas</label>
             <input name="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp">

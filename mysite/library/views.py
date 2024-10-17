@@ -1,9 +1,12 @@
+from django.contrib.auth import password_validation
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from .models import Book, BookInstance, Author
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib import messages
 
 # Create your views here.
 
@@ -77,5 +80,32 @@ class UserBookInstanceListView(LoginRequiredMixin, generic.ListView):
         return BookInstance.objects.filter(reader=self.request.user)
 
 def register(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        if password == password2:
+            if User.objects.filter(username=username).exists():
+                messages.error(request, f"Vartotojas vardas {username} užimtas!")
+                return redirect("register")
+            else:
+                if User.objects.filter(email=email).exists():
+                    messages.error(request, f"Vartotojas su el. paštu {email} jau užregistruotas!")
+                    return redirect("register")
+                else:
+                    try:
+                        password_validation.validate_password(password)
+                    except password_validation.ValidationError as err:
+                        for error in err:
+                            messages.error(request, error)
+                        return redirect("register")
+                    User.objects.create_user(username=username, email=email, password=password)
+                    messages.info(request, f"Vartotojas {username} užregistruotas!")
+                    return redirect("login")
+
+        else:
+            messages.error(request, "Slaptažodžiai nesutampa!")
+            return redirect("register")
     return render(request, template_name="registration/register.html")
 
