@@ -76,3 +76,6 @@ class UserBookInstanceListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return BookInstance.objects.filter(reader=self.request.user)
 
+def register(request):
+    return render(request, template_name="registration/register.html")
+
