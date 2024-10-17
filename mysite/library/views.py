@@ -1,12 +1,14 @@
 from django.contrib.auth import password_validation
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from django.views.generic.edit import FormMixin
 from .models import Book, BookInstance, Author
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib import messages
+from .forms import BookReviewForm
 
 # Create your views here.
 
@@ -48,10 +50,29 @@ class BookListView(generic.ListView):
     paginate_by = 6
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(FormMixin, generic.DetailView):
     model = Book
     template_name = "book.html"
     context_object_name = "book"
+    form_class = BookReviewForm
+
+    def get_success_url(self):
+        return reverse("book", kwargs={"pk": self.object.pk})
+
+    # standartinis post metodo perrašymas, naudojant FormMixin, galite kopijuoti tiesiai į savo projektą.
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.book = self.object
+        form.instance.reviewer = self.request.user
+        form.save()
+        return super().form_valid(form)
 
 def search(request):
     query = request.GET.get("query")
