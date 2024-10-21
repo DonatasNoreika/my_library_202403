@@ -27,7 +27,11 @@
 </div>
 {% endif %}
 {% for review in book.reviews.all %}
-<div><strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created }}</em></div>
+
+<div>
+    <img class="rounded-circle account-img" src="{{ review.reviewer.profile.photo.url }}" style="width: 40px">
+    <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created }}</em>
+</div>
 <p>{{ review.content }}</p>
 <br>
 {% endfor %}
