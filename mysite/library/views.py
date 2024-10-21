@@ -9,7 +9,8 @@ from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib import messages
-from .forms import BookReviewForm, UserUpdateForm
+from .forms import BookReviewForm, UserUpdateForm, ProfileUpdateForm
+
 
 # Create your views here.
 
@@ -139,14 +140,22 @@ def profile(request):
         new_first_name = request.POST['first_name']
         new_last_name = request.POST['last_name']
         user_update_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_update_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if request.user.email != new_email and User.objects.filter(email=new_email).exists():
             messages.error(request, f"Vartotojas su el. paštu {new_email} jau užregistruotas!")
             return redirect("profile")
-        if user_update_form.is_valid():
+        if user_update_form.is_valid() and profile_update_form.is_valid():
             request.user.first_name = new_first_name
             request.user.last_name = new_last_name
             user_update_form.save()
+            profile_update_form.save()
             messages.info(request, "Profilis atnaujintas")
             return redirect("profile")
+
     user_update_form = UserUpdateForm(instance=request.user)
-    return render(request, template_name="profile.html", context={'user_update_form': user_update_form})
+    profile_update_form = ProfileUpdateForm(instance=request.user.profile)
+    context = {
+        'user_update_form': user_update_form,
+        'profile_update_form': profile_update_form,
+    }
+    return render(request, template_name="profile.html", context=context)
