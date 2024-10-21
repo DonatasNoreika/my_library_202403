@@ -12,10 +12,11 @@
    <li><strong>Prisijungęs nuo: </strong>{{ user.date_joined }}</li>
 </ul>
 <form method="post">
+    {% load crispy_forms_tags %}
     {% csrf_token %}
     <fieldset>
         <legend class="border-bottom mb-4">Profilio info</legend>
-        {{ user_update_form }}
+        {{ user_update_form | crispy }}
     </fieldset>
     <div class="form-group">
         <button class="btn btn-outline-info" type="submit">Atnaujinti</button>
