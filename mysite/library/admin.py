@@ -1,19 +1,23 @@
 from django.contrib import admin
-from .models import Book, BookInstance, Author, Genre, BookReview
+from .models import Book, BookInstance, Author, Genre, BookReview, Profile
+
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ["first_name", 'last_name', 'display_books']
 
+
 class BookInstanceInLine(admin.TabularInline):
     model = BookInstance
-    extra =  0
+    extra = 0
     can_delete = False
     readonly_fields = ['uuid']
     fields = ['uuid', 'due_back', 'status']
 
+
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'isbn', 'author', 'display_genre']
     inlines = [BookInstanceInLine]
+
 
 class BookInstanceAdmin(admin.ModelAdmin):
     list_display = ['uuid', 'book', 'due_back', "reader", 'status', 'is_overdue']
@@ -26,9 +30,9 @@ class BookInstanceAdmin(admin.ModelAdmin):
         ("Pasiekiamumas", {"fields": ("due_back", "status", "reader")}),
     )
 
+
 class BookReviewAdmin(admin.ModelAdmin):
     list_display = ['book', 'date_created', 'reviewer', 'content']
-
 
 
 # Register your models here.
@@ -37,3 +41,4 @@ admin.site.register(BookInstance, BookInstanceAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre)
 admin.site.register(BookReview, BookReviewAdmin)
+admin.site.register(Profile)
