@@ -1,4 +1,5 @@
 from django.contrib.auth import password_validation
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
@@ -130,3 +131,7 @@ def register(request):
             return redirect("register")
     return render(request, template_name="registration/register.html")
 
+
+@login_required
+def profile(request):
+    return render(request, template_name="profile.html")
