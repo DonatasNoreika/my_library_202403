@@ -44,6 +44,11 @@
             <li class="nav-item">
                 <a class="nav-link active" href="{% url 'user_copies' %}">Paimtos knygos</a>
             </li>
+            {% if user.profile.is_employee %}
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'copies' %}">Kopijos</a>
+            </li>
+            {% endif %}
             <li class="nav-item">
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
@@ -81,7 +86,7 @@
 </div>
 
 <div class="mt-5 p-4 bg-dark text-white text-center">
-    <p>© {{ now.year }} Code Academy</p>
+    <p>© {{ now.year }} CodeAcademy</p>
 </div>
 
 </body>

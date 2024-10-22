@@ -159,3 +159,9 @@ def profile(request):
         'profile_update_form': profile_update_form,
     }
     return render(request, template_name="profile.html", context=context)
+
+class BookInstanceListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    context_object_name = "copies"
+    template_name = "copies.html"
+
