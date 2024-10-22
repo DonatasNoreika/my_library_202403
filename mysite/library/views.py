@@ -170,3 +170,15 @@ class BookInstanceDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = "copy"
     template_name = "copy.html"
 
+
+class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
+    model = BookInstance
+    template_name = "copy_form.html"
+    fields = ['book', 'status']
+    success_url = "/library/copies/"
+
+    def form_valid(self, form):
+        form.instance.reader = self.request.user
+        form.save()
+        return super().form_valid(form)
+

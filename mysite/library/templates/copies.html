@@ -2,6 +2,7 @@
 {% block "title" %}Knygų kopijos{% endblock %}
 
 {% block "content" %}
+<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'copies_new' %}">Nauja kopija</a>
 <h1>Knygų kopijos</h1>
 {% for copy in copies %}
 <a href="{{ copy.pk }}"><p>{{ copy }}</p></a>
