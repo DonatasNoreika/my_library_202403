@@ -9,7 +9,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib import messages
-from .forms import BookReviewForm, UserUpdateForm, ProfileUpdateForm
+from .forms import BookReviewForm, UserUpdateForm, ProfileUpdateForm, BookInstanceUpdateForm
 
 
 # Create your views here.
@@ -186,7 +186,8 @@ class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
 class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = BookInstance
     template_name = "copy_form.html"
-    fields = ['book', 'status', 'reader', 'due_back']
     success_url = "/library/copies/"
+    # fields = ['book', 'status', 'reader', 'due_back']
+    form_class = BookInstanceUpdateForm
 
 
