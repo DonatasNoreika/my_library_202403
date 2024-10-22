@@ -1,6 +1,6 @@
 from django.contrib.auth import password_validation
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.views.generic.edit import FormMixin
@@ -160,22 +160,32 @@ def profile(request):
     }
     return render(request, template_name="profile.html", context=context)
 
-class BookInstanceListView(LoginRequiredMixin, generic.ListView):
+class BookInstanceListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     model = BookInstance
     context_object_name = "copies"
     template_name = "copies.html"
 
-class BookInstanceDetailView(LoginRequiredMixin, generic.DetailView):
+    def test_func(self):
+        return self.request.user.profile.is_employee
+
+
+class BookInstanceDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
     model = BookInstance
     context_object_name = "copy"
     template_name = "copy.html"
 
+    def test_func(self):
+        return self.request.user.profile.is_employee
 
-class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
+
+class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = BookInstance
     template_name = "copy_form.html"
     fields = ['book', 'status']
     success_url = "/library/copies/"
+
+    def test_func(self):
+        return self.request.user.profile.is_employee
 
     # def form_valid(self, form):
     #     form.instance.reader = self.request.user
@@ -183,17 +193,23 @@ class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
     #     return super().form_valid(form)
 
 
-class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
+class BookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = BookInstance
     template_name = "copy_form.html"
     success_url = "/library/copies/"
     # fields = ['book', 'status', 'reader', 'due_back']
     form_class = BookInstanceUpdateForm
 
+    def test_func(self):
+        return self.request.user.profile.is_employee
 
-class BookInstanceDeleteView(LoginRequiredMixin, generic.DeleteView):
+
+class BookInstanceDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = BookInstance
     template_name = "copy_delete.html"
     context_object_name = 'copy'
     success_url = "/library/copies/"
+
+    def test_func(self):
+        return self.request.user.profile.is_employee
 
