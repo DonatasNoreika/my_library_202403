@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block "title" %}Komentaro redagavimas{% endblock %}
+
+{% block "content" %}
+<div class="content-section">
+    <form method="POST">
+        {% load crispy_forms_tags %}
+        {% csrf_token %}
+        <legend class="border-bottom mb-4">Komentaro redagavimas</legend>
+        {{ form | crispy }}
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Išsaugoti</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

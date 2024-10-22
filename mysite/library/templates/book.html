@@ -31,6 +31,12 @@
 <div>
     <img class="rounded-circle account-img" src="{{ review.reviewer.profile.photo.url }}" style="width: 40px">
     <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created }}</em>
+    {% if review.reviewer == user %}
+    <div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'reviews_update' review.pk %}">Redaguoti</a>
+    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'reviews_delete' review.pk %}">Ištrinti</a>
+    </div>
+    {% endif %}
 </div>
 <p>{{ review.content }}</p>
 <br>

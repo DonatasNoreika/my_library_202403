@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.views.generic.edit import FormMixin
-from .models import Book, BookInstance, Author
+from .models import Book, BookInstance, Author, BookReview
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -187,11 +187,6 @@ class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.Cr
     def test_func(self):
         return self.request.user.profile.is_employee
 
-    # def form_valid(self, form):
-    #     form.instance.reader = self.request.user
-    #     form.save()
-    #     return super().form_valid(form)
-
 
 class BookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = BookInstance
@@ -213,3 +208,28 @@ class BookInstanceDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.De
     def test_func(self):
         return self.request.user.profile.is_employee
 
+
+class BookReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = BookReview
+    template_name = "review_update.html"
+    fields = ['content']
+    # success_url = "/library/books/"
+
+    def get_success_url(self):
+        return reverse("book", kwargs={"pk": self.object.book.pk})
+
+    def test_func(self):
+        return self.get_object().reviewer == self.request.user
+
+
+class BookReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = BookReview
+    template_name = "review_delete.html"
+    context_object_name = "review"
+    # success_url = "/library/books/"
+
+    def get_success_url(self):
+        return reverse("book", kwargs={"pk": self.object.book.pk})
+
+    def test_func(self):
+        return self.get_object().reviewer == self.request.user
