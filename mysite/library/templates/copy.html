@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block "title" %}Knygos kopija{% endblock %}
+
+{% block "content" %}
+<h1>Knygos kopija</h1>
+<ul>
+   <li><strong>Knyga: </strong>{{ copy.book }}</li>
+   <li><strong>UUID: </strong>{{ copy.uuid }}</li>
+   <li><strong>Būsena: </strong>{{ copy.get_status_display }}</li>
+   <li><strong>Skaitytojas: </strong>{{ copy.reader }}</li>
+   <li><strong>Gražinimo data: </strong>{{ copy.due_back }}</li>
+</ul>
+{% endblock %}

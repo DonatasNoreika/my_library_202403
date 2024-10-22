@@ -4,7 +4,7 @@
 {% block "content" %}
 <h1>Knygų kopijos</h1>
 {% for copy in copies %}
-<p>{{ copy }}</p>
+<a href="{{ copy.pk }}"><p>{{ copy }}</p></a>
 <hr>
 {% endfor %}
 {% endblock %}

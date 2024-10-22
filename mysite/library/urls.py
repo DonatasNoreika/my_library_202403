@@ -12,6 +12,7 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     path("usercopies/", views.UserBookInstanceListView.as_view(), name="user_copies"),
     path("copies/", views.BookInstanceListView.as_view(), name="copies"),
+    path("copies/<int:pk>", views.BookInstanceDetailView.as_view(), name="copy"),
 ]
 
 urlpatterns += [
