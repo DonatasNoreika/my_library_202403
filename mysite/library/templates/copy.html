@@ -10,4 +10,7 @@
    <li><strong>Skaitytojas: </strong>{{ copy.reader }}</li>
    <li><strong>Gražinimo data: </strong>{{ copy.due_back }}</li>
 </ul>
+<div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'copies_update' copy.pk %}">Redaguoti</a>
+</div>
 {% endblock %}

@@ -14,7 +14,7 @@ urlpatterns = [
     path("copies/", views.BookInstanceListView.as_view(), name="copies"),
     path("copies/<int:pk>", views.BookInstanceDetailView.as_view(), name="copy"),
     path("copies/new", views.BookInstanceCreateView.as_view(), name="copies_new"),
-
+    path("copies/<int:pk>/update", views.BookInstanceUpdateView.as_view(), name="copies_update"),
 ]
 
 urlpatterns += [

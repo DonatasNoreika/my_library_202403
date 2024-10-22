@@ -182,3 +182,11 @@ class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
         form.save()
         return super().form_valid(form)
 
+
+class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = BookInstance
+    template_name = "copy_form.html"
+    fields = ['book', 'status', 'reader', 'due_back']
+    success_url = "/library/copies/"
+
+
