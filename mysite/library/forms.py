@@ -29,3 +29,4 @@ class BookInstanceUpdateForm(forms.ModelForm):
         model = BookInstance
         fields = ['book', 'status', 'reader', 'due_back']
         widgets = {"due_back": MyDateInput()}
+

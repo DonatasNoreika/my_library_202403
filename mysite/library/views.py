@@ -191,3 +191,9 @@ class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = BookInstanceUpdateForm
 
 
+class BookInstanceDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = BookInstance
+    template_name = "copy_delete.html"
+    context_object_name = 'copy'
+    success_url = "/library/copies/"
+
