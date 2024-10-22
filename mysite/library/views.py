@@ -177,10 +177,10 @@ class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
     fields = ['book', 'status']
     success_url = "/library/copies/"
 
-    def form_valid(self, form):
-        form.instance.reader = self.request.user
-        form.save()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     form.instance.reader = self.request.user
+    #     form.save()
+    #     return super().form_valid(form)
 
 
 class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
