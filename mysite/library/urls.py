@@ -18,6 +18,7 @@ urlpatterns = [
     path("copies/<int:pk>/delete", views.BookInstanceDeleteView.as_view(), name="copies_delete"),
     path("reviews/<int:pk>/update", views.BookReviewUpdateView.as_view(), name="reviews_update"),
     path("reviews/<int:pk>/delete", views.BookReviewDeleteView.as_view(), name="reviews_delete"),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 urlpatterns += [
