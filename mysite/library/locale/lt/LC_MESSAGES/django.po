@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-23 10:46+0300\n"
-"PO-Revision-Date: 2024-10-23 10:47+0300\n"
+"POT-Creation-Date: 2024-10-23 10:55+0300\n"
+"PO-Revision-Date: 2024-10-23 10:57+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -19,6 +19,50 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && (n%100<11 || n%100>19) ? 0 : "
 "n%10>=2 && n%10<=9 && (n%100<11 || n%100>19) ? 1 : 2);\n"
 "X-Generator: Poedit 3.5\n"
+
+#: .\templates\base.html:15
+msgid "Local library"
+msgstr "Rajono biblioteka"
+
+#: .\templates\base.html:16
+msgid "Demo project"
+msgstr "Demo projektas"
+
+#: .\templates\base.html:23
+msgid "HOME"
+msgstr "PRADŽIA"
+
+#: .\templates\base.html:26
+msgid "Authors"
+msgstr "Autoriai"
+
+#: .\templates\base.html:29
+msgid "Books"
+msgstr "Knygos"
+
+#: .\templates\base.html:33
+msgid "Search"
+msgstr "Paieška"
+
+#: .\templates\base.html:46
+msgid "My books"
+msgstr "Mano knygos"
+
+#: .\templates\base.html:50
+msgid "Copies"
+msgstr "Kopijos"
+
+#: .\templates\base.html:56
+msgid "Logout"
+msgstr "Atsijungti"
+
+#: .\templates\base.html:61
+msgid "Register"
+msgstr "Registruotis"
+
+#: .\templates\base.html:64
+msgid "Login"
+msgstr "Atsijungti"
 
 #: .\templates\index.html:3
 msgid "My Website"
@@ -44,7 +88,7 @@ msgstr "Laisvų knygų:"
 msgid "Authors:"
 msgstr "Autorių:"
 
-#: .\templates\index.html:15
+#: .\templates\index.html:14
 #, python-format
 msgid "Your visits: %(num_visits)s"
 msgstr "Jūs lankotės %(num_visits)s-ą kartą"
