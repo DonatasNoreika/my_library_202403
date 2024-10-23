@@ -4,6 +4,8 @@ import uuid
 from datetime import date
 from tinymce.models import HTMLField
 from PIL import Image
+from django.utils.translation import gettext_lazy as _
+
 
 class Profile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
@@ -58,14 +60,14 @@ class Genre(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(verbose_name="Pavadinimas", max_length=200)
-    summary = models.TextField(verbose_name="Aprašymas", max_length=2000, help_text='Trumpas knygos aprašymas')
-    isbn = models.CharField(verbose_name="ISBN", max_length=13,
+    title = models.CharField(verbose_name=_("Title"), max_length=200)
+    summary = models.TextField(verbose_name=_("Summary"), max_length=2000, help_text='Trumpas knygos aprašymas')
+    isbn = models.CharField(verbose_name=_("ISBN"), max_length=13,
                             help_text='13 Simbolių <a href="https://www.isbn-international.org/content/what-isbn">ISBN kodas</a>')
-    author = models.ForeignKey(to="Author", verbose_name="Autorius", on_delete=models.SET_NULL, null=True, blank=True,
+    author = models.ForeignKey(to="Author", verbose_name=_("Author"), on_delete=models.SET_NULL, null=True, blank=True,
                                related_name="books")
-    genre = models.ManyToManyField(to="Genre", verbose_name="Žanrai", help_text='Išrinkite žanrą (-us) šiai knygai')
-    cover = models.ImageField(verbose_name="Viršelis", upload_to="covers", null=True, blank=True)
+    genre = models.ManyToManyField(to="Genre", verbose_name=_("Genres"), help_text='Išrinkite žanrą (-us) šiai knygai')
+    cover = models.ImageField(verbose_name=_("Cover"), upload_to="covers", null=True, blank=True)
 
     def display_genre(self):
         genres = self.genre.all()
@@ -74,14 +76,14 @@ class Book(models.Model):
             result += genre.name + ", "
         return result
 
-    display_genre.short_description = "Žanras (-ai)"
+    display_genre.short_description = _("Genres")
 
     def __str__(self):
         return f"{self.title} ({self.author})"
 
     class Meta:
-        verbose_name = "Knyga"
-        verbose_name_plural = "Knygos"
+        verbose_name = _("Book")
+        verbose_name_plural = _("Books")
 
 
 class BookInstance(models.Model):
