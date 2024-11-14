@@ -13,6 +13,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from django.utils.translation import gettext_lazy as _
+from .my_settings import (SECRET_KEY,
+                          EMAIL_HOST_USER,
+                          EMAIL_HOST_PASSWORD,
+                          DEBUG,
+                          ALLOWED_HOSTS,
+                          STATICFILES_DIRS,
+                          STATIC_ROOT)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,21 +29,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s+rbbu560vb0m3nqrd5e$$1m!gh9fxpo7$xup4aw%$+323x-pe'
+SECRET_KEY = SECRET_KEY
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mano_pastas@gmail.com'
+EMAIL_HOST_USER = EMAIL_HOST_USER
 # el. pašto adresas iš kurio siųsite
-EMAIL_HOST_PASSWORD = 'VerySecret'
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 # slaptažodis
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ALLOWED_HOSTS
 
 
 # Application definition
@@ -185,3 +192,7 @@ TINYMCE_DEFAULT_CONFIG = {
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+
+STATICFILES_DIRS = STATICFILES_DIRS
+STATIC_ROOT = STATIC_ROOT
